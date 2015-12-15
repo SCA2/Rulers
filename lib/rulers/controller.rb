@@ -1,13 +1,26 @@
 require "erubis"
+require "rulers/file_model"
 
 module Rulers
   class Controller
+
+    include Rulers::Model
+
     def initialize(env)
+      @request = Rack::Request.new env
       @env = env
     end
 
     def env
       @env
+    end
+
+    def request
+      @request
+    end
+
+    def params
+      request.params
     end
 
     def render(view_name, locals={})
